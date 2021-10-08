@@ -44,5 +44,5 @@ cities << City.create(name: 'Moncton') if City.find_by(name:'Moncton').nil?
 
 # Create Bookings for the new Teachers
 teachers.each do |teacher|
-  teacher.bookings.create(username: Faker::Name.last_name.downcase, city_id: rand(cities.length), booked_for: Faker::Date.forward(days: 60))
+  teacher.bookings.create(username: Faker::Name.last_name.downcase, city_id: City.find(rand(cities.length)).id, booked_for: Faker::Date.forward(days: 60))
 end
