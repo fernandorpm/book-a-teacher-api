@@ -15,7 +15,8 @@ module Api::V1
       if @teacher.save
         render json: { status: 'SUCCESS', message: 'Teacher Saved', data: @teacher }, status: :ok
       else
-        render json: {status: 'ERROR', message: 'Teacher not saved', data: @teacher.errors },status: :unprocessable_entity
+        render json: { status: 'ERROR', message: 'Teacher not saved', data: @teacher.errors },
+               status: :unprocessable_entity
       end
     end
 
@@ -30,6 +31,5 @@ module Api::V1
     def teacher_params
       params.permit(:name, :subject_id, :details)
     end
-
   end
 end
