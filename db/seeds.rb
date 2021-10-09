@@ -20,9 +20,18 @@ teachers = []
 subjects.each do |subject|
   amount_of_teachers = rand(3)
   for i in 1..amount_of_teachers do
-    teachers << subject.teachers.create(name: Faker::Name.unique.name, details: Faker::Coffee.unique.notes)
+    # teachers << 
+    new_teacher = subject.teachers.new(
+      name: Faker::Name.unique.name,
+      details: Faker::Coffee.unique.notes
+    )
+    new_teacher.professional_photo.attach(io: File.open(Faker::LoremFlickr.image(size: "50x60", search_terms: ['sports', 'fitness'], match_all: true)))
+    puts new_teacher.name
+    teachers << new_teacher.save
   end
 end
+
+puts teachers.length
 
 # Create Cities if they don't exist yet
 cities = []

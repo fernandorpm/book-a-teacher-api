@@ -1,19 +1,19 @@
 module Api::V1
   class TeachersController < ApplicationController
     def index
-      @teachers = Teacher.with_subject
+      @teachers = Teacher.teachers_json
       render json: @teachers
     end
 
     def show
       @teacher = Teacher.find(params[:id])
-      render json: @teacher
+      render json: @teacher.teacher_json
     end
 
     def create
       @teacher = Teacher.new(teacher_params)
       if @teacher.save
-        render json: { status: 'SUCCESS', message: 'Teacher Saved', data: @teacher }, status: :ok
+        render json: { status: 'SUCCESS', message: 'Teacher Saved', data: @teacher.teacher_json }, status: :ok
       else
         render json: { status: 'ERROR', message: 'Teacher not saved', data: @teacher.errors },
                status: :unprocessable_entity
@@ -23,13 +23,13 @@ module Api::V1
     def destroy
       @teacher = Teacher.find(params[:id])
       @teacher.destroy
-      render json: { status: 'SUCCESS', message: 'Teacher Deleted', data: @teacher }, status: :ok
+      render json: { status: 'SUCCESS', message: 'Teacher Deleted', data: @teacher.teacher_json }, status: :ok
     end
 
     private
 
     def teacher_params
-      params.permit(:name, :subject_id, :details)
+      params.permit(:name, :subject_id, :details, :professional_photo)
     end
   end
 end
