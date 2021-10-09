@@ -1,12 +1,20 @@
 class Teacher < ApplicationRecord
   include Rails.application.routes.url_helpers
 
-  has_one_attached :professional_photo
+  validates :name, :subject_id, :details, presence: true
 
   has_many :bookings, dependent: :destroy
   belongs_to :subject
 
-  validates :name, :subject_id, :details, :professional_photo, presence: true
+  has_one_attached :professional_photo
+  validates :professional_photo, presence: true, blob: {
+    content_type: [
+      'image/png',
+      'image/jpg',
+      'image/jpeg'
+    ],
+    size_range: 1..5.megabytes
+  }
 
   def self.json_list
     includes(:subject).map do |teacher|

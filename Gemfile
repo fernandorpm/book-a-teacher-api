@@ -8,6 +8,8 @@ gem 'puma', '~> 5.0'
 gem 'rack-cors'
 gem 'rails', '~> 6.1.4', '>= 6.1.4.1'
 
+gem 'activestorage-validator'
+
 gem 'bootsnap', '>= 1.4.4', require: false
 
 group :development, :test do
