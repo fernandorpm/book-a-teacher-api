@@ -1,5 +1,3 @@
-require 'faker'
-
 # Create Subjects if they don't exist yet
 subjects = []
 
@@ -12,26 +10,6 @@ subjects << Subject.create(name: 'Python Django') if Subject.find_by(name: 'Pyth
 subjects << Subject.create(name: 'Flutter') if Subject.find_by(name: 'Flutter').nil?
 subjects << Subject.create(name: 'Unity 3D') if Subject.find_by(name: 'Unity 3D').nil?
 subjects << Subject.create(name: 'Arduino') if Subject.find_by(name: 'Arduino').nil?
-
-# Create random pre-made Unique Teachers - like Cyborgs!
-# It can also NOT create a Teacher, depending on the random number generated
-teachers = []
-
-subjects.each do |subject|
-  amount_of_teachers = rand(3)
-  for i in 1..amount_of_teachers do
-    # teachers << 
-    new_teacher = subject.teachers.new(
-      name: Faker::Name.unique.name,
-      details: Faker::Coffee.unique.notes
-    )
-    new_teacher.professional_photo.attach(io: File.open(Faker::LoremFlickr.image(size: "50x60", search_terms: ['sports', 'fitness'], match_all: true)))
-    puts new_teacher.name
-    teachers << new_teacher.save
-  end
-end
-
-puts teachers.length
 
 # Create Cities if they don't exist yet
 cities = []
@@ -51,7 +29,3 @@ cities << City.create(name: 'Charlottetown') if City.find_by(name:'Charlottetown
 cities << City.create(name: 'London') if City.find_by(name:'London').nil?
 cities << City.create(name: 'Moncton') if City.find_by(name:'Moncton').nil?
 
-# Create Bookings for the new Teachers
-teachers.each do |teacher|
-  teacher.bookings.create(username: Faker::Name.last_name.downcase, city_id: City.find(rand(cities.length) + 1).id, booked_for: Faker::Date.forward(days: 60))
-end

@@ -8,7 +8,7 @@ class Teacher < ApplicationRecord
 
   validates :name, :subject_id, :details, :professional_photo, presence: true
 
-  def self.teachers_json
+  def self.json_list
     includes(:subject).map do |teacher|
       {
         id: teacher.id,
@@ -20,11 +20,11 @@ class Teacher < ApplicationRecord
     end
   end
 
-  def teacher_json
+  def json_single
     {
-      id: self.id,
-      name: self.name,
-      details: self.details,
+      id: id,
+      name: name,
+      details: details,
       professional_photo: photo_url,
       subject_name: subject_name
     }
@@ -35,6 +35,6 @@ class Teacher < ApplicationRecord
   end
 
   def photo_url
-    url_for(self.professional_photo)
+    url_for(professional_photo)
   end
 end
