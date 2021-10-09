@@ -13,7 +13,7 @@ class Teacher < ApplicationRecord
       'image/jpg',
       'image/jpeg'
     ],
-    size_range: 1..5.megabytes
+    size_range: (1..5).megabytes
   }
 
   def self.json_list
