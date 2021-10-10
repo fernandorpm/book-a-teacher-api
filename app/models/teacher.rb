@@ -6,6 +6,9 @@ class Teacher < ApplicationRecord
   has_many :bookings, dependent: :destroy
   belongs_to :subject
 
+  @min_size = 0
+  @max_size = 5
+
   has_one_attached :professional_photo
   validates :professional_photo, presence: true, blob: {
     content_type: [
@@ -13,7 +16,7 @@ class Teacher < ApplicationRecord
       'image/jpg',
       'image/jpeg'
     ],
-    size_range: (1..5).megabytes
+    size_range: @min_size..@max_size.megabytes
   }
 
   def self.json_list
