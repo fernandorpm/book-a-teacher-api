@@ -5,5 +5,7 @@ Rails.application.routes.draw do
       resources :teachers, only: %i[index show create destroy]
     end
   end
+
+  root to: 'teachers#index'
   
 end
