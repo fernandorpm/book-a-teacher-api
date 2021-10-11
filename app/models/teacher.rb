@@ -20,7 +20,8 @@ class Teacher < ApplicationRecord
   }
 
   def self.json_list
-    includes(:subject).map do |teacher|
+    with_attached_professional_photo
+      .includes(:subject).map do |teacher|
       {
         id: teacher.id,
         name: teacher.name,

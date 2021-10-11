@@ -13,7 +13,7 @@ module Api::V1
     def create
       @teacher = Teacher.new(teacher_params)
       if @teacher.save
-        render json: { status: 'SUCCESS', message: 'Teacher Saved', data: @teacher.json_single }, status: :ok
+        render json: { status: 'SUCCESS', message: 'Teacher Saved', data: @teacher.json_single }, status: :created
       else
         render json: { status: 'ERROR', message: 'Teacher not saved', data: @teacher.errors },
                status: :unprocessable_entity
@@ -23,7 +23,7 @@ module Api::V1
     def destroy
       @teacher = Teacher.find(params[:id])
       @teacher.destroy
-      render json: { status: 'SUCCESS', message: 'Teacher Deleted', data: @teacher.json_single }, status: :ok
+      render json: { status: 'SUCCESS', message: 'Teacher Deleted', data: @teacher.json_single }, status: :accepted
     end
 
     private
