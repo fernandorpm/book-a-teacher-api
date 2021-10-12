@@ -12,6 +12,7 @@ class Booking < ApplicationRecord
         id: booking.id,
         username: booking.username,
         teacher: booking.teacher.name,
+        subject: booking.teacher.subject.name,
         city: booking.city.name,
         professional_photo: booking.teacher&.photo_url,
         booked_for: booking.booked_for

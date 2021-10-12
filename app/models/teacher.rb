@@ -27,7 +27,7 @@ class Teacher < ApplicationRecord
         name: teacher.name,
         details: teacher.details,
         professional_photo: teacher&.photo_url,
-        subject_name: teacher.subject.name
+        subject: teacher.subject.name
       }
     end
   end
@@ -38,12 +38,8 @@ class Teacher < ApplicationRecord
       name: name,
       details: details,
       professional_photo: photo_url,
-      subject_name: subject_name
+      subject: subject.name
     }
-  end
-
-  def subject_name
-    Subject.find(subject_id).name
   end
 
   def photo_url

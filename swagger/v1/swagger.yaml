@@ -1,0 +1,225 @@
+---
+openapi: 3.0.1
+info:
+  title: Book a Teacher API - V1
+  version: v1
+paths:
+  "/api/v1/bookings":
+    post:
+      summary: Books a Time with a Teacher
+      tags:
+      - Bookings
+      parameters: []
+      responses:
+        '201':
+          description: booking created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                teacher_id:
+                  type: integer
+                city_id:
+                  type: integer
+                booked_for:
+                  type: string
+                  format: date
+              required:
+              - username
+              - teacher_id
+              - city_id
+              - booked_for
+    get:
+      summary: Retrieves a list of bookings
+      tags:
+      - Bookings
+      responses:
+        '200':
+          description: Scheduled Bookings
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  username:
+                    type: string
+                  teacher:
+                    type: string
+                  subject:
+                    type: string
+                  city:
+                    type: string
+                  booked_for:
+                    type: string
+                    format: date
+  "/api/v1/bookings/{id}":
+    delete:
+      summary: Deletes the Booking with the {id} provided by the path
+      tags:
+      - Bookings
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Deleted the booking scheduled
+        '404':
+          description: Booking not found
+  "/api/v1/cities":
+    get:
+      summary: Retrieves a list of Cities
+      tags:
+      - Cities
+      responses:
+        '200':
+          description: Cities found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  created_at:
+                    type: string
+                    format: datetime
+                  updated_at:
+                    type: string
+                    format: datetime
+  "/api/v1/subjects":
+    get:
+      summary: Retrieves a list of Subjects taught by the Teachers
+      tags:
+      - Subjects
+      responses:
+        '200':
+          description: Subjects found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  created_at:
+                    type: string
+                    format: datetime
+                  updated_at:
+                    type: string
+                    format: datetime
+  "/api/v1/teachers":
+    post:
+      summary: Creates a new Teacher
+      tags:
+      - Teachers
+      parameters: []
+      responses:
+        '201':
+          description: Teacher created
+        '422':
+          description: invalid request
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                subject_id:
+                  type: integer
+                details:
+                  type: integer
+                professional_photo:
+                  type: file
+              required:
+              - name
+              - subject_id
+              - details
+              - professional_photo
+    get:
+      summary: Retrieves a list of Teachers
+      tags:
+      - Teachers
+      responses:
+        '200':
+          description: Teachers found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  details:
+                    type: string
+                  professional_photo:
+                    type: string
+                  subject:
+                    type: string
+  "/api/v1/teachers/{id}":
+    get:
+      summary: Finds the Teacher with the {id} provided by the path
+      tags:
+      - Teachers
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Teachers found
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                  name:
+                    type: string
+                  details:
+                    type: string
+                  professional_photo:
+                    type: string
+                  subject:
+                    type: string
+    delete:
+      summary: Deletes the Teacher with the {id} provided by the path
+      tags:
+      - Teachers
+      parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Deleted the Teacher
+        '404':
+          description: Teacher not found
+servers:
+- url: http://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000

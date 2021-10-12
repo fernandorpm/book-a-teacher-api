@@ -15,7 +15,7 @@ module Api::V1
       if @teacher.save
         render json: { status: 'SUCCESS', message: 'Teacher Saved', data: @teacher.json_single }, status: :created
       else
-        render json: { status: 'ERROR', message: 'Teacher not saved', data: @teacher.errors },
+        render json: { status: 'ERROR', message: 'Teacher not saved', error: @teacher.errors },
                status: :unprocessable_entity
       end
     end

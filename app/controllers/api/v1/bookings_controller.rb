@@ -14,7 +14,7 @@ module Api::V1
         render json: { status: 'SUCCESS', message: 'You booked a time with a Teacher!', data: @booking },
                status: :created
       else
-        render json: { status: 'ERROR', message: 'Failed to book a time', data: @booking.errors },
+        render json: { status: 'ERROR', message: 'Failed to book a time', error: @booking.errors },
                status: :unprocessable_entity
       end
     end
