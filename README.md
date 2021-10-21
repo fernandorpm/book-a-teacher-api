@@ -4,9 +4,13 @@
 
 > Book a Teacher is a web app to schedule a time with an online teacher!
 
-![greeting](./greeting.gif)
+![screenshot](./screenshot.png)
 
 Access the Front-end of the web app by [clicking here](https://github.com/arthurborgesdev/book-a-teacher-webapp).
+
+## Group Size
+
+Size of the Team: 2 people
 
 ## Built With
 
