@@ -135,7 +135,6 @@ Therefore, we adapted the relationship between Users and Teachers (Bookings) to 
 ![ERD](book_erd.png)
 
 ## Authors
-Number of peple
 
 👤 **Fernando R P Marques**
 
