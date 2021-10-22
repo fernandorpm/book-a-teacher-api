@@ -26,4 +26,8 @@ group :development do
   gem 'spring'
 end
 
+group :production do
+  gem "aws-sdk-s3", require: false
+end
+
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
